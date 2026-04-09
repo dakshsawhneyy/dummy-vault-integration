@@ -15,7 +15,7 @@ WORKDIR /app
 COPY --from=builder /app /app
 
 # Creating a non root user
-RUN addgroup appgroup && adduser -S appuser -G appgroup
+RUN useradd -m appuser
 USER appuser
 
 # Running the Application
