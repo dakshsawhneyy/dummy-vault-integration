@@ -1,0 +1,32 @@
+name: DevSecOps Pipeline
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Install Vault CLI
+      run: |
+        sudo apt update
+        sudo apt install -y vault
+        
+    - name: Get Secret
+      run: |
+        export VAULT_ADDR=${{ secrets.VAULT_ADDR }}
+        export VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}
+        vault kv get -field=DOCKER_PASSWORD secret/myapp > secret.txt
+
+    # - name: Build Image
+    #   run: docker build -t myapp:latest .
+
+    # - name: Scan Image
+    #   run: |
+    #      trivy image --exit-code 1 --severity HIGH,CRITICAL myapp:latest
+
+    # - name: Push Image
+    #   run: echo "Push to DockerHub/ECR"
