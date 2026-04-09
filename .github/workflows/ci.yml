@@ -13,7 +13,7 @@ jobs:
     - name: Install Vault CLI
       run: |
         sudo apt update
-        sudo apt install -y vault
+        sudo snap install -y vault
         
     - name: Get Secret
       run: |
