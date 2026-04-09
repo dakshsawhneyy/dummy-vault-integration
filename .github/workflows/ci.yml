@@ -21,12 +21,12 @@ jobs:
         export VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}
         vault kv get -field=DOCKER_PASSWORD secret/myapp > secret.txt
 
-    # - name: Build Image
-    #   run: docker build -t myapp:latest .
+    - name: Build Image
+      run: docker build -t myapp:latest .
 
-    # - name: Scan Image
-    #   run: |
-    #      trivy image --exit-code 1 --severity HIGH,CRITICAL myapp:latest
+    - name: Scan Image
+      run: |
+         trivy image --exit-code 1 --severity HIGH,CRITICAL myapp:latest
 
     # - name: Push Image
     #   run: echo "Push to DockerHub/ECR"
