@@ -9,7 +9,7 @@ RUN npm install
 COPY app.js app.js
 
 # Stage 2: Production
-FROM node:18-alpine
+FROM node:18-slim
 WORKDIR /app
 
 COPY --from=builder /app /app
